@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RemaxSQLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="numero_Agent" />
+    </Key>
+    <Property Name="numero_Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="langue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ville" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Maisons" Relationship="Self.refAgent" FromRole="Agents" ToRole="Maisons" />
+    <NavigationProperty Name="Messages" Relationship="Self.refAgentMess" FromRole="Agents" ToRole="Messages" />
+  </EntityType>
+  <EntityType Name="Maison">
+    <Key>
+      <PropertyRef Name="refMaison" />
+    </Key>
+    <Property Name="refMaison" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="option" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ville" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="prix" Type="Int32" />
+    <Property Name="superficie" Type="Int32" />
+    <Property Name="refAgent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="propriete" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Agent" Relationship="Self.refAgent" FromRole="Maisons" ToRole="Agents" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="refMessage" />
+    </Key>
+    <Property Name="refMessage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="titre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="message1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="envoyeur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="refAgent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="nouveau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Agent" Relationship="Self.refAgentMess" FromRole="Messages" ToRole="Agents" />
+  </EntityType>
+  <Association Name="refAgent">
+    <End Role="Agents" Type="Self.Agent" Multiplicity="0..1" />
+    <End Role="Maisons" Type="Self.Maison" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agents">
+        <PropertyRef Name="numero_Agent" />
+      </Principal>
+      <Dependent Role="Maisons">
+        <PropertyRef Name="refAgent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="refAgentMess">
+    <End Role="Agents" Type="Self.Agent" Multiplicity="0..1" />
+    <End Role="Messages" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agents">
+        <PropertyRef Name="numero_Agent" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="refAgent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RemaxSQLEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agents" EntityType="Self.Agent" />
+    <EntitySet Name="Maisons" EntityType="Self.Maison" />
+    <EntitySet Name="Messages" EntityType="Self.Message" />
+    <AssociationSet Name="refAgent" Association="Self.refAgent">
+      <End Role="Agents" EntitySet="Agents" />
+      <End Role="Maisons" EntitySet="Maisons" />
+    </AssociationSet>
+    <AssociationSet Name="refAgentMess" Association="Self.refAgentMess">
+      <End Role="Agents" EntitySet="Agents" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RemaxSQLModelStoreContainer" CdmEntityContainer="RemaxSQLEntities2">
+    <EntitySetMapping Name="Agents">
+      <EntityTypeMapping TypeName="RemaxSQLModel.Agent">
+        <MappingFragment StoreEntitySet="Agents">
+          <ScalarProperty Name="numero_Agent" ColumnName="numero_Agent" />
+          <ScalarProperty Name="genre" ColumnName="genre" />
+          <ScalarProperty Name="langue" ColumnName="langue" />
+          <ScalarProperty Name="ville" ColumnName="ville" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Maisons">
+      <EntityTypeMapping TypeName="RemaxSQLModel.Maison">
+        <MappingFragment StoreEntitySet="Maisons">
+          <ScalarProperty Name="refMaison" ColumnName="refMaison" />
+          <ScalarProperty Name="option" ColumnName="option" />
+          <ScalarProperty Name="ville" ColumnName="ville" />
+          <ScalarProperty Name="prix" ColumnName="prix" />
+          <ScalarProperty Name="superficie" ColumnName="superficie" />
+          <ScalarProperty Name="refAgent" ColumnName="refAgent" />
+          <ScalarProperty Name="propriete" ColumnName="propriete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="RemaxSQLModel.Message">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="refMessage" ColumnName="refMessage" />
+          <ScalarProperty Name="titre" ColumnName="titre" />
+          <ScalarProperty Name="message1" ColumnName="message" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="envoyeur" ColumnName="envoyeur" />
+          <ScalarProperty Name="refAgent" ColumnName="refAgent" />
+          <ScalarProperty Name="nouveau" ColumnName="nouveau" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
